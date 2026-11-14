@@ -1,6 +1,30 @@
 {
   "brand": {
-    "title": "ADMIN PORTAL"
+    "title": "PHỤ TÙNG Ô TÔ KV",
+    "subtitle": "Hệ thống Quản trị & Điều phối Phụ tùng Ô tô KV"
+  },
+  "auth": {
+    "loginTitle": "Đăng Nhập Quản Trị Hệ Thống",
+    "loginSubtitle": "Khu vực giới hạn dành riêng cho Ban Quản trị và Nhân viên Kỹ thuật.",
+    "emailLabel": "Email Quản trị",
+    "emailPlaceholder": "admin@phutungotokv.vn",
+    "passwordLabel": "Mật khẩu",
+    "passwordPlaceholder": "Nhập mật khẩu quản trị",
+    "loginButton": "Đăng Nhập Vào Portal",
+    "loading": "Đang xác thực...",
+    "logout": "Đăng xuất",
+    "loginRequired": "Yêu cầu đăng nhập để truy cập trang này",
+    "errors": {
+      "invalidCredentials": "Email hoặc mật khẩu không chính xác",
+      "unauthorizedRole": "Tài khoản của bạn không có quyền truy cập trang quản trị",
+      "networkError": "Không thể kết nối đến máy chủ Backend (Port 8080)"
+    }
+  },
+  "metrics": {
+    "totalProducts": "Tổng SKU Phụ Tùng",
+    "fitmentVehicles": "Dòng Xe Ánh Xạ",
+    "stockWarning": "Cảnh Báo Tồn Kho",
+    "pendingOrders": "Đơn Chờ Chốt VIN"
   },
   "nav": {
     "vehicles": "Dữ Liệu Xe & Fitment",
@@ -30,4 +54,3 @@
     }
   }
 }
-

@@ -36,6 +36,43 @@ func (h *Handler) RegisterRoutes(r chi.Router, authMiddleware func(http.Handler)
 	})
 }
 
+// RegisterAdminRoutes binds administration endpoints requiring elevated privileges.
+func (h *Handler) RegisterAdminRoutes(r chi.Router, authMiddleware func(http.Handler) http.Handler) {
+	r.Post("/login", h.AdminLogin)
+	r.Post("/logout", h.Logout)
+	r.Post("/refresh", h.Refresh)
+
+	r.Group(func(protected chi.Router) {
+		protected.Use(authMiddleware)
+		protected.Get("/me", h.Me)
+	})
+}
+
+// AdminLogin authenticates administrative and staff accounts only.
+func (h *Handler) AdminLogin(w http.ResponseWriter, r *http.Request) {
+	var in LoginInput
+	if err := json.NewDecoder(r.Body).Decode(&in); err != nil {
+		httpx.Error(w, http.StatusBadRequest, "INVALID_BODY", "Malformed JSON request body")
+		return
+	}
+
+	tokens, err := h.svc.Login(r.Context(), in)
+	if err != nil {
+		httpx.Error(w, http.StatusUnauthorized, "INVALID_CREDENTIALS", "Incorrect email or password")
+		return
+	}
+
+	if tokens.User.Role != RoleAdmin && tokens.User.Role != RoleStaff {
+		httpx.Error(w, http.StatusForbidden, "FORBIDDEN", "Only ADMIN and STAFF can access admin portal")
+		return
+	}
+
+	h.setAuthCookies(w, tokens)
+	httpx.JSON(w, http.StatusOK, map[string]any{
+		"user": tokens.User,
+	})
+}
+
 // Register creates a new user account and sets session cookies.
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 	var in RegisterInput

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AutoParts Admin Portal | Operations & Fitment Management",
-  description: "High-performance automotive operations and WMS portal",
+  title: "Phụ Tùng Ô Tô KV - Quản Trị Hệ Thống",
+  description: "Cổng điều hành và quản lý phụ tùng, đơn hàng Gara Phụ Tùng Ô Tô KV",
 };
 
 // RootLayout provides workspace layout for AutoParts operational admin.

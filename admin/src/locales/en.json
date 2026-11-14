@@ -1,6 +1,30 @@
 {
   "brand": {
-    "title": "ADMIN PORTAL"
+    "title": "ADMIN PORTAL",
+    "subtitle": "Automotive Operations & Fitment Management"
+  },
+  "auth": {
+    "loginTitle": "System Administration Login",
+    "loginSubtitle": "Restricted portal for System Administrators and Operations Staff.",
+    "emailLabel": "Admin Email",
+    "emailPlaceholder": "admin@autoparts.vn",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter admin password",
+    "loginButton": "Sign In to Portal",
+    "loading": "Authenticating...",
+    "logout": "Sign Out",
+    "loginRequired": "Login required to access this portal",
+    "errors": {
+      "invalidCredentials": "Incorrect email or password",
+      "unauthorizedRole": "Your account is not authorized to access admin portal",
+      "networkError": "Cannot connect to backend server (Port 8080)"
+    }
+  },
+  "metrics": {
+    "totalProducts": "Total Part SKUs",
+    "fitmentVehicles": "Mapped Vehicles",
+    "stockWarning": "Stock Warnings",
+    "pendingOrders": "Pending VIN Matching"
   },
   "nav": {
     "vehicles": "Vehicle Data & Fitment",
@@ -30,4 +54,3 @@
     }
   }
 }
-
