@@ -1,0 +1,33 @@
+{
+  "brand": {
+    "title": "ADMIN PORTAL"
+  },
+  "nav": {
+    "vehicles": "Dữ Liệu Xe & Fitment",
+    "inventory": "Quản Lý Kho & Vị Trí",
+    "orders": "Đơn Hàng & Chốt VIN",
+    "b2b": "Garage B2B & Công Nợ",
+    "analytics": "Báo Cáo Tài Chính"
+  },
+  "fitment": {
+    "title": "Ma Trận Phụ Tùng & Xe Tương Thích (Fitment Matrix)",
+    "subtitle": "Quản lý danh mục 1 SKU phụ tùng tương thích với nhiều dòng xe",
+    "importExcel": "Import Excel",
+    "addPart": "Thêm Phụ Tùng",
+    "filterPlaceholder": "Lọc theo mã OEM, dòng xe (Vios, Ranger)...",
+    "recordCount": "{count} Bản ghi",
+    "table": {
+      "oem": "Mã OEM",
+      "name": "Tên Phụ Tùng",
+      "origin": "Hãng / Xuất xứ",
+      "compatible": "Đời Xe Tương Thích",
+      "location": "Vị Trí Kho",
+      "stock": "Tồn Kho",
+      "actions": "Thao Tác",
+      "edit": "Sửa",
+      "unit": "cái",
+      "variants": "biến thể"
+    }
+  }
+}
+
