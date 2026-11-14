@@ -1,0 +1,33 @@
+{
+  "brand": {
+    "title": "ADMIN PORTAL"
+  },
+  "nav": {
+    "vehicles": "Vehicle Data & Fitment",
+    "inventory": "Warehouse & Bin Location",
+    "orders": "Orders & VIN Verification",
+    "b2b": "B2B Garages & Credit Limit",
+    "analytics": "Financial Analytics"
+  },
+  "fitment": {
+    "title": "Parts & Fitment Compatibility Matrix",
+    "subtitle": "Manage multi-vehicle compatibility for single part SKUs",
+    "importExcel": "Import Excel",
+    "addPart": "Add Part",
+    "filterPlaceholder": "Filter by OEM, Model (Vios, Ranger)...",
+    "recordCount": "{count} Records",
+    "table": {
+      "oem": "OEM Number",
+      "name": "Part Name",
+      "origin": "Brand / Origin",
+      "compatible": "Compatible Vehicles",
+      "location": "Bin Location",
+      "stock": "Stock",
+      "actions": "Actions",
+      "edit": "Edit",
+      "unit": "pcs",
+      "variants": "variants"
+    }
+  }
+}
+

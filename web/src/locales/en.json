@@ -1,0 +1,43 @@
+{
+  "brand": {
+    "name": "AUTOPARTS",
+    "extension": ".STORE",
+    "tagline": "Automotive Supply & Garage Network"
+  },
+  "nav": {
+    "myGarage": "My Garage ({count} cars)",
+    "home": "Home",
+    "catalog": "Catalog",
+    "community": "Community",
+    "account": "Account"
+  },
+  "hero": {
+    "badge": "100% Verified OEM Fitment & E-Warranty",
+    "title": "Lookup Auto Parts by VIN & Technical Number",
+    "subtitle": "Accurately search spare parts by Make, Model, OEM part number, or instant camera VIN scan.",
+    "searchPlaceholder": "Enter OEM number (e.g., 04465-0D150), Bosch, Denso...",
+    "scanVin": "Scan VIN",
+    "searchAction": "Search"
+  },
+  "categories": {
+    "title": "Vehicle Systems",
+    "viewAll": "View all 6 systems",
+    "engine": {
+      "title": "Engine System",
+      "desc": "Oil filters, Spark plugs, Belts, Engine block"
+    },
+    "brake": {
+      "title": "Brake System",
+      "desc": "Brake pads, Calipers, Rotors, Brake fluid"
+    },
+    "suspension": {
+      "title": "Suspension & Steering",
+      "desc": "Shocks, Control arms, Ball joints, Tie rods"
+    },
+    "electrical": {
+      "title": "Electrical & AC",
+      "desc": "Alternators, Compressors, Starters, Batteries"
+    }
+  }
+}
+

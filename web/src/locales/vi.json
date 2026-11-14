@@ -1,0 +1,43 @@
+{
+  "brand": {
+    "name": "AUTOPARTS",
+    "extension": ".STORE",
+    "tagline": "Hệ thống Cung ứng Phụ tùng Ô tô & Mạng lưới Gara"
+  },
+  "nav": {
+    "myGarage": "Garage của tôi ({count} xe)",
+    "home": "Trang chủ",
+    "catalog": "Danh mục",
+    "community": "Cộng đồng",
+    "account": "Tài khoản"
+  },
+  "hero": {
+    "badge": "100% Phụ tùng chuẩn mã OEM & Bảo hành điện tử",
+    "title": "Tra Cứu Phụ Tùng Theo Số VIN & Mã Kỹ Thuật",
+    "subtitle": "Tìm kiếm chính xác linh kiện xe hơi theo Hãng, Dòng xe, Mã phụ tùng gốc hoặc quét camera số khung.",
+    "searchPlaceholder": "Nhập mã OEM (vd: 04465-0D150), mã Bosch, Denso...",
+    "scanVin": "Quét VIN",
+    "searchAction": "Tra cứu"
+  },
+  "categories": {
+    "title": "Hệ Thống Cơ Cấu Xe",
+    "viewAll": "Xem toàn bộ 6 nhóm",
+    "engine": {
+      "title": "Hệ Thống Động Cơ",
+      "desc": "Lọc nhớt, Bugi, Dây curoa, Lốc máy"
+    },
+    "brake": {
+      "title": "Hệ Thống Phanh",
+      "desc": "Má phanh đĩa, Càng phanh, Dầu phanh"
+    },
+    "suspension": {
+      "title": "Gầm - Giảm Xóc",
+      "desc": "Phuộc nhún, Càng A, Rô-tuyn lái"
+    },
+    "electrical": {
+      "title": "Điện & Điều Hòa",
+      "desc": "Lốc lạnh, Máy phát, Bình ắc quy"
+    }
+  }
+}
+
