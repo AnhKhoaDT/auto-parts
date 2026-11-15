@@ -22,6 +22,7 @@ import type { User } from "@/lib/api";
 import VinScannerModal from "@/features/vin/VinScannerModal";
 import type { DecodedVehicle } from "@/features/vin/vinDecoder";
 import FastQuoteModal from "@/features/quote/FastQuoteModal";
+import SearchAutocomplete from "@/features/search/SearchAutocomplete";
 
 interface HeaderProps {
   dict: ReturnType<typeof getDictionary>;
@@ -54,6 +55,7 @@ export default function Header({
   const router = useRouter();
   const [isVinScannerOpen, setIsVinScannerOpen] = useState(false);
   const [isFastQuoteOpen, setIsFastQuoteOpen] = useState(false);
+  const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
 
   const handleApplyVinVehicle = (formatted: string, decoded: DecodedVehicle) => {
     localStorage.setItem("kv_active_car_filter", formatted);
@@ -137,7 +139,7 @@ export default function Header({
                 window.location.href = "/phu-tung";
               }
             }}
-            className="hidden lg:flex flex-1 max-w-2xl mx-6 items-center rounded-xl bg-slate-50 border-2 border-slate-200 focus-within:border-sky-600 focus-within:bg-white p-1 transition shadow-inner"
+            className="hidden lg:flex flex-1 max-w-2xl mx-6 items-center rounded-xl bg-slate-50 border-2 border-slate-200 focus-within:border-sky-600 focus-within:bg-white p-1 transition shadow-inner relative"
           >
             <select
               value={searchCategory}
@@ -152,7 +154,13 @@ export default function Header({
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setIsAutocompleteOpen(e.target.value.trim().length >= 2);
+              }}
+              onFocus={() => {
+                if (searchQuery.trim().length >= 2) setIsAutocompleteOpen(true);
+              }}
               placeholder={dict.hero.searchPlaceholder}
               className="w-full min-w-0 px-3 py-1.5 text-xs text-slate-900 placeholder-slate-400 bg-transparent outline-none"
             />
@@ -171,6 +179,13 @@ export default function Header({
               <Search className="h-3.5 w-3.5" />
               <span>{dict.hero.searchAction}</span>
             </button>
+
+            <SearchAutocomplete
+              query={searchQuery}
+              isOpen={isAutocompleteOpen}
+              onClose={() => setIsAutocompleteOpen(false)}
+              dict={dict}
+            />
           </form>
 
           {/* Right Actions: My Garage, Profile, Cart */}

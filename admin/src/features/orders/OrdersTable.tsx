@@ -7,9 +7,11 @@ import {
   Truck,
   Check,
   Printer,
+  Download,
 } from "lucide-react";
 import type { getDictionary } from "@/lib/i18n";
 import type { AdminOrder } from "./PackingSlipModal";
+import { exportToCsv } from "@/lib/exportCsv";
 
 interface OrdersTableProps {
   dict: ReturnType<typeof getDictionary>;
@@ -43,6 +45,33 @@ export default function OrdersTable({
     }
     return true;
   });
+
+  const handleExportOrders = () => {
+    const headers = [
+      "Mã Đơn Hàng",
+      "Thời Gian Đặt",
+      "Khách Hàng / Gara",
+      "Số Điện Thoại",
+      "Địa Chỉ Nhận Hàng",
+      "Ghi Chú Xe / VIN",
+      "Tổng Tiền (VNĐ)",
+      "Hình Thức Thanh Toán",
+      "Trạng Thái Đơn",
+    ];
+    const rows = filteredOrders.map((o) => [
+      o.orderCode,
+      new Date(o.createdAt).toLocaleString("vi-VN"),
+      o.customerName,
+      o.phone,
+      o.address,
+      o.vinNote || "",
+      o.totalAmount,
+      o.paymentMethod,
+      o.status,
+    ]);
+    const dateStr = new Date().toISOString().split("T")[0];
+    exportToCsv(`KV-Bao-Cao-Don-Hang-${dateStr}`, headers, rows);
+  };
 
   return (
     <div className="space-y-6">
@@ -79,16 +108,27 @@ export default function OrdersTable({
         </div>
       </div>
 
-      {/* Search Input */}
-      <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-2 max-w-md">
-        <Search className="h-4 w-4 text-slate-400 shrink-0" />
-        <input
-          type="text"
-          value={orderSearch}
-          onChange={(e) => setOrderSearch(e.target.value)}
-          placeholder={dict.orders.searchPlaceholder}
-          className="w-full text-xs outline-hidden text-slate-900 placeholder-slate-400"
-        />
+      {/* Search Input and Export Action */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="bg-white p-2.5 px-3 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-2 max-w-md w-full">
+          <Search className="h-4 w-4 text-slate-400 shrink-0" />
+          <input
+            type="text"
+            value={orderSearch}
+            onChange={(e) => setOrderSearch(e.target.value)}
+            placeholder={dict.orders.searchPlaceholder}
+            className="w-full text-xs outline-hidden text-slate-900 placeholder-slate-400"
+          />
+        </div>
+
+        <button
+          type="button"
+          onClick={handleExportOrders}
+          className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white hover:bg-emerald-50 border border-slate-300 hover:border-emerald-500 text-slate-700 hover:text-emerald-800 text-xs font-bold transition shadow-2xs shrink-0"
+        >
+          <Download className="h-4 w-4 text-emerald-600" />
+          <span>{dict.orders.exportExcel}</span>
+        </button>
       </div>
 
       {/* Orders Table */}

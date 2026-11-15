@@ -79,6 +79,23 @@
     "scanVin": "Scan VIN",
     "searchAction": "Search"
   },
+  "searchAutocomplete": {
+    "suggestedParts": "Matching Spare Parts",
+    "viewAll": "View all results for",
+    "noResults": "No matching parts found",
+    "pressEnter": "Press Enter to search all items",
+    "categories": "Related Categories"
+  },
+  "orderTracker": {
+    "stepReceived": "Order Received",
+    "stepReceivedDesc": "Part list confirmed",
+    "stepPacking": "Warehouse Packing",
+    "stepPackingDesc": "OEM verified & QR sealed",
+    "stepShipping": "2H Express Dispatch",
+    "stepShippingDesc": "Shipper en-route to garage",
+    "stepCompleted": "Delivered & Verified",
+    "stepCompletedDesc": "Handover & e-warranty active"
+  },
   "vinScanner": {
     "title": "VIN Lookup & Vehicle Decoder",
     "subtitle": "Scan registration card or enter 17-digit VIN to detect exact vehicle model",
@@ -279,7 +296,19 @@
     "warrantyQrTitle": "Electronic QR Warranty Policy",
     "warrantyQrDesc": "Every part dispatched carries an anti-counterfeit QR code. Activate your electronic warranty directly on the KV Auto Parts platform or scan at any partner garage.",
     "shippingTitle": "2-Hour Express Delivery",
-    "shippingDesc": "Orders before 15:30 receive same-day dispatch. Direct delivery to your garage lift."
+    "shippingDesc": "Orders before 15:30 receive same-day dispatch. Direct delivery to your garage lift.",
+    "tierTitle": "Compare Quality Tiers for Same OEM Number",
+    "tierSubtitle": "Choose matching parts according to budget and workshop durability recommendations",
+    "tierGenuine": "Factory Genuine",
+    "tierOEM": "Tier 1 OEM (Recommended)",
+    "tierAftermarket": "Economy Aftermarket",
+    "tierGenuineDesc": "Original automaker packaging, 100% factory spec, 12-24 months warranty.",
+    "tierOEMDesc": "Direct from Tier 1 supplier (Denso, Bosch), 99% durability, saves 40% cost.",
+    "tierAftermarketDesc": "Certified international aftermarket, cost-effective for commercial fleet/taxi.",
+    "tierDurability": "Equivalent Durability",
+    "tierBestChoice": "Best Value",
+    "tierSelect": "Select this Tier",
+    "tierCurrent": "Viewing"
   },
   "cart": {
     "title": "Shopping Cart & Vehicle Fitment Check",

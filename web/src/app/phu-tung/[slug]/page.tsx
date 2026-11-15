@@ -28,6 +28,7 @@ import { catalogApi, ProductDetail, Product, VehicleCompatibility } from "@/lib/
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
+import PartTierComparison from "@/features/catalog/PartTierComparison";
 
 const STATIC_PRODUCTS: Record<string, ProductDetail> = {
   "bo-ma-phanh-truoc-denso-japan-04465-0d150": {
@@ -177,6 +178,34 @@ export default function ProductDetailPage() {
     setTimeout(() => setAddedToCart(false), 2500);
   };
 
+  const isGarageUser = user?.role === "GARAGE";
+
+  const handleAddTierToCart = (p: Product) => {
+    if (!product) return;
+    addToCart({
+      id: `${p.id}-${p.grade || "tier"}`,
+      slug: p.slug,
+      oem_number: p.oem_number,
+      name: p.name,
+      brand_name: p.brand_name || "OEM Parts",
+      image_url: p.image_url,
+      grade: p.grade,
+      retail_price: p.retail_price,
+      wholesale_price: p.wholesale_price,
+      stock_quantity: p.stock_quantity,
+      warranty_months: p.warranty_months,
+      compatibilities: product.compatibilities?.map((c) => ({
+        make: c.make,
+        model: c.model,
+        year_from: c.year_from,
+        year_to: c.year_to,
+        engine: c.engine,
+      })),
+    });
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 2500);
+  };
+
   const handleOrderNow = () => {
     handleAddToCart();
     router.push("/gio-hang");
@@ -251,6 +280,37 @@ export default function ProductDetailPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 antialiased flex flex-col pb-20 md:pb-0">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: product.name,
+            sku: product.sku || product.oem_number,
+            mpn: product.oem_number,
+            brand: {
+              "@type": "Brand",
+              name: product.brand_name || "OEM",
+            },
+            description: product.description || product.name,
+            image: product.image_url ? [product.image_url] : [],
+            offers: {
+              "@type": "Offer",
+              priceCurrency: "VND",
+              price: product.retail_price,
+              availability:
+                product.stock_quantity > 0
+                  ? "https://schema.org/InStock"
+                  : "https://schema.org/OutOfStock",
+              seller: {
+                "@type": "Organization",
+                name: "Phụ Tùng Ô Tô KV",
+              },
+            },
+          }),
+        }}
+      />
       <Header
         dict={dict}
         user={user}
@@ -469,6 +529,16 @@ export default function ProductDetailPage() {
               )}
             </div>
           </div>
+        </div>
+
+        {/* OEM QUALITY TIER COMPARISON */}
+        <div className="mb-8">
+          <PartTierComparison
+            product={product}
+            dict={dict}
+            onAddToCart={handleAddTierToCart}
+            isGarageUser={isGarageUser}
+          />
         </div>
 
         {/* COMPATIBILITY TABLE */}

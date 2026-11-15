@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { QrCode, ShoppingBag, Truck, CheckCircle2 } from "lucide-react";
 import type { getDictionary } from "@/lib/i18n";
+import OrderStatusTracker from "../orders/OrderStatusTracker";
 
 export interface OrderItem {
   id: string;
@@ -81,6 +82,12 @@ export default function OrdersHistoryTab({ dict, orders }: OrdersHistoryTabProps
               ))}
             </div>
 
+            <OrderStatusTracker
+              status={ord.status || (ord.paymentMethod === "VIETQR" ? "CHO_THANH_TOAN" : "DANG_XU_LY")}
+              dict={dict}
+              className="my-3"
+            />
+
             <div className="pt-3 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
               <span className="text-xs font-bold text-slate-900">
                 Tổng thanh toán: <strong className="text-sky-600 text-sm">{formatVND(ord.totalAmount)}</strong>
@@ -119,6 +126,8 @@ export default function OrdersHistoryTab({ dict, orders }: OrdersHistoryTabProps
               <span className="font-bold text-slate-700">880.000 đ</span>
             </p>
           </div>
+
+          <OrderStatusTracker status="HOAN_THANH" dict={dict} className="my-3" />
 
           <div className="pt-3 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
             <span className="text-xs font-bold text-slate-900">

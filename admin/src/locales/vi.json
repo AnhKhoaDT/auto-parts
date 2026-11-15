@@ -84,6 +84,8 @@
     "approve2H": "Duyệt Giao 2H",
     "confirmPaid": "Xác Nhận Đã Thu",
     "printSlip": "In Phiếu Kho",
+    "exportExcel": "Xuất Excel Đơn Hàng",
+    "exportInventory": "Xuất Excel Tồn Kho",
     "cancelOrder": "Hủy",
     "empty": "Không tìm thấy đơn hàng nào phù hợp với bộ lọc.",
     "packingSlipTitle": "PHIẾU XUẤT KHO KIÊM BÀN GIAO HỎA TỐC 2H",

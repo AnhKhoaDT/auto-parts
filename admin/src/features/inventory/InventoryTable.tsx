@@ -1,8 +1,9 @@
 "use client";
 
-import { Boxes, Minus, Plus } from "lucide-react";
+import { Boxes, Minus, Plus, Download } from "lucide-react";
 import type { getDictionary } from "@/lib/i18n";
 import type { InventoryPart } from "../fitment/FitmentMatrixTable";
+import { exportToCsv } from "@/lib/exportCsv";
 
 interface InventoryTableProps {
   dict: ReturnType<typeof getDictionary>;
@@ -19,6 +20,31 @@ export default function InventoryTable({
   const formatVnd = (amount: number) =>
     new Intl.NumberFormat("vi-VN").format(amount) + " đ";
 
+  const handleExportInventory = () => {
+    const headers = [
+      "Mã OEM",
+      "Tên Phụ Tùng",
+      "Thương Hiệu",
+      "Dòng Xe Tương Thích",
+      "Vị Trí Kệ Kho (Bin)",
+      "Tồn Kho Hiện Tại",
+      "Ngưỡng Tối Thiểu",
+      "Đơn Giá (VNĐ)",
+    ];
+    const rows = parts.map((p) => [
+      p.oem,
+      p.name,
+      p.brand,
+      p.compatible,
+      p.location,
+      p.stock,
+      p.minThreshold,
+      p.price,
+    ]);
+    const dateStr = new Date().toISOString().split("T")[0];
+    exportToCsv(`KV-Ton-Kho-${dateStr}`, headers, rows);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 gap-3">
@@ -31,6 +57,15 @@ export default function InventoryTable({
             Điều chỉnh số lượng thực tế, vị trí ô kệ tại kho Hà Nội & TP.HCM
           </p>
         </div>
+
+        <button
+          type="button"
+          onClick={handleExportInventory}
+          className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white hover:bg-emerald-50 border border-slate-300 hover:border-emerald-500 text-slate-700 hover:text-emerald-800 text-xs font-bold transition shadow-2xs shrink-0 self-start sm:self-auto"
+        >
+          <Download className="h-4 w-4 text-emerald-600" />
+          <span>{dict.orders.exportInventory}</span>
+        </button>
       </div>
 
       <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-xs">

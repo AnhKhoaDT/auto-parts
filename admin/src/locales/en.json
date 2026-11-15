@@ -84,6 +84,8 @@
     "approve2H": "Dispatch 2H",
     "confirmPaid": "Confirm Paid",
     "printSlip": "Print Slip",
+    "exportExcel": "Export Orders Excel",
+    "exportInventory": "Export Inventory CSV",
     "cancelOrder": "Cancel",
     "empty": "No orders found matching the filter criteria.",
     "packingSlipTitle": "WAREHOUSE PACKING SLIP & 2H EXPRESS DISPATCH NOTE",

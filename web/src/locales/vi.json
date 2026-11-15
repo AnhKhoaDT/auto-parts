@@ -79,6 +79,23 @@
     "scanVin": "Quét VIN",
     "searchAction": "Tra cứu"
   },
+  "searchAutocomplete": {
+    "suggestedParts": "Phụ Tùng Khớp Tìm Kiếm",
+    "viewAll": "Xem tất cả kết quả cho",
+    "noResults": "Không tìm thấy phụ tùng khớp từ khóa",
+    "pressEnter": "Nhấn Enter để tìm kiếm toàn diện",
+    "categories": "Danh Mục Liên Quan"
+  },
+  "orderTracker": {
+    "stepReceived": "Tiếp Nhận Đơn",
+    "stepReceivedDesc": "Đã chốt phụ tùng & mã đơn",
+    "stepPacking": "Kho Soạn Hàng",
+    "stepPackingDesc": "Đối chiếu OEM & dán tem QR",
+    "stepShipping": "Giao Hỏa Tốc 2H",
+    "stepShippingDesc": "Shipper đang chuyển tới xưởng",
+    "stepCompleted": "Hoàn Tất Bàn Giao",
+    "stepCompletedDesc": "Ký nhận & bảo hành điện tử"
+  },
   "vinScanner": {
     "title": "Tra Cứu & Giải Mã Số Khung VIN",
     "subtitle": "Quét camera sổ đăng kiểm hoặc nhập 17 ký tự số khung để nhận diện chuẩn xác 100% đời xe",
@@ -279,7 +296,19 @@
     "warrantyQrTitle": "Chính Sách Bảo Hành Điện Tử QR",
     "warrantyQrDesc": "Mỗi phụ tùng xuất kho đều được dán tem QR chống giả. Khách hàng kích hoạt bảo hành qua ứng dụng Phụ Tùng Ô Tô KV hoặc quét mã tại bất kỳ Gara đối tác trong mạng lưới.",
     "shippingTitle": "Giao Hàng Hỏa Tốc 2H",
-    "shippingDesc": "Đặt trước 15:30 — Giao phụ tùng ngay trong ngày. Gara nhận hàng tại cầu nâng, không cần chờ đợi."
+    "shippingDesc": "Đặt trước 15:30 — Giao phụ tùng ngay trong ngày. Gara nhận hàng tại cầu nâng, không cần chờ đợi.",
+    "tierTitle": "So Sánh Các Phân Khúc Phụ Tùng Cùng Mã OEM",
+    "tierSubtitle": "Tùy chọn phụ tùng theo ngân sách và độ bền khuyến nghị của xưởng dịch vụ",
+    "tierGenuine": "Chính Hãng (Genuine)",
+    "tierOEM": "OEM Cung Ứng Hãng (Khuyên Dùng)",
+    "tierAftermarket": "Thay Thế Tiết Kiệm (Aftermarket)",
+    "tierGenuineDesc": "Đóng gói bao bì hãng xe, độ bền chuẩn 100%, bảo hành 12-24 tháng.",
+    "tierOEMDesc": "Sản xuất từ nhà máy OEM cấp 1 (Denso, Bosch), độ bền 99%, tiết kiệm 40% chi phí.",
+    "tierAftermarketDesc": "Tiêu chuẩn kiểm định Nhật Bản / Đức, tối ưu chi phí cho xe chạy dịch vụ.",
+    "tierDurability": "Độ bền tương đương",
+    "tierBestChoice": "Lựa Chọn Tối Ưu",
+    "tierSelect": "Chọn phân khúc này",
+    "tierCurrent": "Đang xem"
   },
   "cart": {
     "title": "Giỏ Hàng & Đối Soát Độ Khớp Xe",

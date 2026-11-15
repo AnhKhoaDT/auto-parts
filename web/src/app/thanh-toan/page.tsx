@@ -27,6 +27,7 @@ import { useCart } from "@/features/cart/useCart";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
+import OrderStatusTracker from "@/features/orders/OrderStatusTracker";
 
 // CheckoutPage handles delivery information, dynamic VietQR generation, and order persistence.
 export default function CheckoutPage() {
@@ -213,6 +214,14 @@ export default function CheckoutPage() {
               {cdict.orderSuccessSubtitle}{" "}
               <span className="font-mono font-bold text-sky-600 text-sm">{orderCode}</span>
             </p>
+
+            {/* Live Order Dispatch Progress Tracker */}
+            <OrderStatusTracker
+              status={paymentMethod === "VIETQR" ? "CHO_THANH_TOAN" : "DANG_XU_LY"}
+              dict={dict}
+              className="mb-6 text-left"
+            />
+
             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 text-left text-xs space-y-2 mb-6">
               <div className="flex justify-between">
                 <span className="text-slate-500">Khách hàng:</span>
