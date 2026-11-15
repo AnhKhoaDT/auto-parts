@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Phone,
   MessageSquare,
@@ -17,6 +19,9 @@ import {
 } from "lucide-react";
 import type { getDictionary } from "@/lib/i18n";
 import type { User } from "@/lib/api";
+import VinScannerModal from "@/features/vin/VinScannerModal";
+import type { DecodedVehicle } from "@/features/vin/vinDecoder";
+import FastQuoteModal from "@/features/quote/FastQuoteModal";
 
 interface HeaderProps {
   dict: ReturnType<typeof getDictionary>;
@@ -46,6 +51,35 @@ export default function Header({
   searchCategory,
   setSearchCategory,
 }: HeaderProps) {
+  const router = useRouter();
+  const [isVinScannerOpen, setIsVinScannerOpen] = useState(false);
+  const [isFastQuoteOpen, setIsFastQuoteOpen] = useState(false);
+
+  const handleApplyVinVehicle = (formatted: string, decoded: DecodedVehicle) => {
+    localStorage.setItem("kv_active_car_filter", formatted);
+    try {
+      const existing = localStorage.getItem("kv_garage_vehicles");
+      const list = existing ? JSON.parse(existing) : [];
+      const newCar = {
+        id: `vin-${Date.now()}`,
+        user_id: user?.id || "guest",
+        make: decoded.make,
+        model: decoded.model,
+        year: decoded.year,
+        engine: decoded.engine,
+        vin: decoded.vin,
+        nickname: "Xe tra cứu từ VIN",
+        is_default: true,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+      localStorage.setItem("kv_garage_vehicles", JSON.stringify([newCar, ...list]));
+    } catch {
+      // Ignore JSON error
+    }
+    router.push(`/phu-tung?vehicle=${encodeURIComponent(formatted)}`);
+  };
+
   return (
     <>
       {/* 01. Top Utility Hotline Bar (Deep Charcoal) */}
@@ -94,7 +128,17 @@ export default function Header({
           </Link>
 
           {/* Mega Search Bar */}
-          <div className="hidden lg:flex flex-1 max-w-2xl mx-6 items-center rounded-xl bg-slate-50 border-2 border-slate-200 focus-within:border-sky-600 focus-within:bg-white p-1 transition shadow-inner">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (searchQuery.trim()) {
+                window.location.href = `/phu-tung?q=${encodeURIComponent(searchQuery.trim())}`;
+              } else {
+                window.location.href = "/phu-tung";
+              }
+            }}
+            className="hidden lg:flex flex-1 max-w-2xl mx-6 items-center rounded-xl bg-slate-50 border-2 border-slate-200 focus-within:border-sky-600 focus-within:bg-white p-1 transition shadow-inner"
+          >
             <select
               value={searchCategory}
               onChange={(e) => setSearchCategory(e.target.value)}
@@ -114,19 +158,20 @@ export default function Header({
             />
             <button
               type="button"
+              onClick={() => setIsVinScannerOpen(true)}
               className="p-1.5 rounded-lg text-slate-400 hover:text-sky-600 hover:bg-slate-100 transition mr-1"
               title={dict.hero.scanVin}
             >
               <Camera className="h-4 w-4 text-sky-600" />
             </button>
             <button
-              type="button"
+              type="submit"
               className="px-4 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition flex items-center gap-1.5 shrink-0 shadow-sm"
             >
               <Search className="h-3.5 w-3.5" />
               <span>{dict.hero.searchAction}</span>
             </button>
-          </div>
+          </form>
 
           {/* Right Actions: My Garage, Profile, Cart */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -217,28 +262,56 @@ export default function Header({
       <nav className="hidden md:block bg-slate-900 border-b border-slate-800 text-xs font-semibold text-slate-200">
         <div className="mx-auto max-w-[1560px] flex items-center justify-between px-4 sm:px-8 xl:px-12 py-2.5">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2 text-sky-400 font-bold hover:text-sky-300 cursor-pointer">
+            <Link href="/phu-tung" className="flex items-center gap-2 text-sky-400 font-bold hover:text-sky-300 transition">
               <Layers className="h-4 w-4" />
               <span>{dict.megaNav.allCategories}</span>
-            </span>
-            <span className="hover:text-white cursor-pointer transition">{dict.megaNav.engine}</span>
-            <span className="hover:text-white cursor-pointer transition">{dict.megaNav.brake}</span>
-            <span className="hover:text-white cursor-pointer transition">{dict.megaNav.suspension}</span>
-            <span className="hover:text-white cursor-pointer transition">{dict.megaNav.cooling}</span>
-            <span className="hover:text-white cursor-pointer transition">{dict.megaNav.maintenance}</span>
+            </Link>
+            <Link href="/phu-tung?category=phu-tung-dong-co" className="hover:text-white transition">
+              {dict.megaNav.engine}
+            </Link>
+            <Link href="/phu-tung?category=he-thong-phanh" className="hover:text-white transition">
+              {dict.megaNav.brake}
+            </Link>
+            <Link href="/phu-tung?category=gam-giam-xoc" className="hover:text-white transition">
+              {dict.megaNav.suspension}
+            </Link>
+            <Link href="/phu-tung?category=dien-dieu-hoa" className="hover:text-white transition">
+              {dict.megaNav.cooling}
+            </Link>
+            <Link href="/phu-tung?category=dau-nhot-phu-gia" className="hover:text-white transition">
+              {dict.megaNav.maintenance}
+            </Link>
           </div>
           <div className="flex items-center gap-4 text-[11px]">
-            <span className="text-amber-400 hover:text-amber-300 cursor-pointer font-bold flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => setIsFastQuoteOpen(true)}
+              className="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 cursor-pointer transition"
+            >
               <Sparkles className="h-3 w-3" />
               <span>{dict.megaNav.wholesalePolicy}</span>
-            </span>
-            <span className="text-slate-400 hover:text-sky-400 cursor-pointer transition">
+            </button>
+            <Link href="/bao-hanh" className="text-slate-400 hover:text-sky-400 transition">
               {dict.megaNav.warrantyCheck}
-            </span>
+            </Link>
           </div>
         </div>
       </nav>
       </div>
+
+      <VinScannerModal
+        isOpen={isVinScannerOpen}
+        onClose={() => setIsVinScannerOpen(false)}
+        onSelectVehicle={handleApplyVinVehicle}
+        dict={dict}
+      />
+
+      <FastQuoteModal
+        isOpen={isFastQuoteOpen}
+        onClose={() => setIsFastQuoteOpen(false)}
+        dict={dict}
+        initialCar={activeCarFilter}
+      />
     </>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { getDictionary } from "@/lib/i18n";
 
 interface CategoriesGridProps {
@@ -19,43 +20,58 @@ export default function CategoriesGrid({ dict }: CategoriesGridProps) {
             Tra cứu linh kiện theo từng hệ thống cơ cấu hoạt động
           </span>
         </div>
-        <span className="text-xs font-bold text-sky-600 hover:text-sky-700 cursor-pointer">
+        <Link
+          href="/phu-tung"
+          className="text-xs font-bold text-sky-600 hover:text-sky-700 transition"
+        >
           {dict.categories.viewAll} &rarr;
-        </span>
+        </Link>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
-        <div className="border border-slate-200 bg-white p-4 rounded-2xl hover:border-sky-500 hover:shadow-md transition cursor-pointer group shadow-xs">
+        <Link
+          href="/phu-tung?category=phu-tung-dong-co"
+          className="border border-slate-200 bg-white p-4 rounded-2xl hover:border-sky-500 hover:shadow-md transition cursor-pointer group shadow-xs block"
+        >
           <span className="text-[10px] font-mono font-bold text-slate-400 block mb-1 group-hover:text-sky-600 transition">
             01 / ENG
           </span>
-          <h3 className="font-bold text-slate-900 text-sm">{dict.categories.engine.title}</h3>
+          <h3 className="font-bold text-slate-900 text-sm group-hover:text-sky-600 transition">{dict.categories.engine.title}</h3>
           <p className="text-[11px] text-slate-500 mt-1 leading-snug">{dict.categories.engine.desc}</p>
-        </div>
+        </Link>
 
-        <div className="border border-slate-200 bg-white p-4 rounded-2xl hover:border-sky-500 hover:shadow-md transition cursor-pointer group shadow-xs">
+        <Link
+          href="/phu-tung?category=he-thong-phanh"
+          className="border border-slate-200 bg-white p-4 rounded-2xl hover:border-sky-500 hover:shadow-md transition cursor-pointer group shadow-xs block"
+        >
           <span className="text-[10px] font-mono font-bold text-slate-400 block mb-1 group-hover:text-sky-600 transition">
             02 / BRK
           </span>
-          <h3 className="font-bold text-slate-900 text-sm">{dict.categories.brake.title}</h3>
+          <h3 className="font-bold text-slate-900 text-sm group-hover:text-sky-600 transition">{dict.categories.brake.title}</h3>
           <p className="text-[11px] text-slate-500 mt-1 leading-snug">{dict.categories.brake.desc}</p>
-        </div>
+        </Link>
 
-        <div className="border border-slate-200 bg-white p-4 rounded-2xl hover:border-sky-500 hover:shadow-md transition cursor-pointer group shadow-xs">
+        <Link
+          href="/phu-tung?category=gam-giam-xoc"
+          className="border border-slate-200 bg-white p-4 rounded-2xl hover:border-sky-500 hover:shadow-md transition cursor-pointer group shadow-xs block"
+        >
           <span className="text-[10px] font-mono font-bold text-slate-400 block mb-1 group-hover:text-sky-600 transition">
             03 / SUS
           </span>
-          <h3 className="font-bold text-slate-900 text-sm">{dict.categories.suspension.title}</h3>
+          <h3 className="font-bold text-slate-900 text-sm group-hover:text-sky-600 transition">{dict.categories.suspension.title}</h3>
           <p className="text-[11px] text-slate-500 mt-1 leading-snug">{dict.categories.suspension.desc}</p>
-        </div>
+        </Link>
 
-        <div className="border border-slate-200 bg-white p-4 rounded-2xl hover:border-sky-500 hover:shadow-md transition cursor-pointer group shadow-xs">
+        <Link
+          href="/phu-tung?category=dien-dieu-hoa"
+          className="border border-slate-200 bg-white p-4 rounded-2xl hover:border-sky-500 hover:shadow-md transition cursor-pointer group shadow-xs block"
+        >
           <span className="text-[10px] font-mono font-bold text-slate-400 block mb-1 group-hover:text-sky-600 transition">
             04 / ELE
           </span>
-          <h3 className="font-bold text-slate-900 text-sm">{dict.categories.electrical.title}</h3>
+          <h3 className="font-bold text-slate-900 text-sm group-hover:text-sky-600 transition">{dict.categories.electrical.title}</h3>
           <p className="text-[11px] text-slate-500 mt-1 leading-snug">{dict.categories.electrical.desc}</p>
-        </div>
+        </Link>
       </div>
     </section>
   );

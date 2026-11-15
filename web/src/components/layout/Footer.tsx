@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { getDictionary } from "@/lib/i18n";
 
 interface FooterProps {
@@ -43,7 +44,11 @@ export default function Footer({ dict }: FooterProps) {
           </h4>
           <ul className="space-y-2 text-[11px]">
             <li className="hover:text-white cursor-pointer transition">{dict.footer.guideVin}</li>
-            <li className="hover:text-white cursor-pointer transition">{dict.footer.warrantyPolicy}</li>
+            <li>
+              <Link href="/bao-hanh" className="hover:text-white transition block">
+                {dict.footer.warrantyPolicy}
+              </Link>
+            </li>
             <li className="hover:text-white cursor-pointer transition">{dict.footer.returnPolicy}</li>
             <li className="hover:text-white cursor-pointer transition">{dict.footer.shippingPolicy}</li>
           </ul>

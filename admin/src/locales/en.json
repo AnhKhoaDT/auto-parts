@@ -3,6 +3,17 @@
     "title": "ADMIN PORTAL",
     "subtitle": "Automotive Operations & Fitment Management"
   },
+  "sidebar": {
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar",
+    "controlCenter": "OPERATIONS CENTER",
+    "operations": "WAREHOUSE & DISPATCH"
+  },
+  "topbar": {
+    "warehouseActive": "Main Depot Tân Bình • Active",
+    "systemLive": "System Online",
+    "searchShortcut": "Quick search OEM, SKU, or VIN..."
+  },
   "auth": {
     "loginTitle": "System Administration Login",
     "loginSubtitle": "Restricted portal for System Administrators and Operations Staff.",
@@ -24,7 +35,7 @@
     "totalProducts": "Total Part SKUs",
     "fitmentVehicles": "Mapped Vehicles",
     "stockWarning": "Stock Warnings",
-    "pendingOrders": "Pending VIN Matching"
+    "pendingOrders": "Pending 2H Dispatch"
   },
   "nav": {
     "vehicles": "Vehicle Data & Fitment",
@@ -52,5 +63,54 @@
       "unit": "pcs",
       "variants": "variants"
     }
+  },
+  "orders": {
+    "title": "Order Dispatch & 2-Hour Express Control",
+    "subtitle": "VIN cross-checking, warehouse dispatch approval, and payment verification",
+    "allFilter": "All Orders",
+    "pendingPayment": "Awaiting VietQR",
+    "processing": "Awaiting Dispatch",
+    "dispatching": "2H In-Transit",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "searchPlaceholder": "Search by order code, customer name, phone, plate...",
+    "orderCode": "Order Ref",
+    "customer": "Customer / Garage",
+    "items": "Dispatched Parts",
+    "total": "Total Amount",
+    "payment": "Payment",
+    "status": "Status",
+    "actions": "Actions",
+    "approve2H": "Dispatch 2H",
+    "confirmPaid": "Confirm Paid",
+    "printSlip": "Print Slip",
+    "cancelOrder": "Cancel",
+    "empty": "No orders found matching the filter criteria.",
+    "packingSlipTitle": "WAREHOUSE PACKING SLIP & 2H EXPRESS DISPATCH NOTE",
+    "packingSlipCompany": "KV AUTO PARTS SUPPLY CO., LTD",
+    "packingSlipNote": "Dispatched with anti-counterfeit QR seals. Direct delivery to workshop lifts within 120 minutes.",
+    "close": "Close"
+  },
+  "b2b": {
+    "title": "B2B Partner Garage Network & Credit Facilities",
+    "subtitle": "Manage 150+ certified installation garages, credit limits, and wholesale pricing",
+    "garageName": "Garage & Address",
+    "manager": "Representative",
+    "phone": "Phone",
+    "tier": "Partner Tier",
+    "discount": "Wholesale Rate",
+    "creditLimit": "Credit Limit",
+    "outstanding": "Outstanding Balance",
+    "status": "Status",
+    "active": "Active"
+  },
+  "analytics": {
+    "title": "Operations & Supply Chain Performance",
+    "subtitle": "Real-time metrics on gross revenue, 100% fitment accuracy, and dispatch speed",
+    "revenueTotal": "Gross Revenue This Month",
+    "revenueB2B": "B2B Garage Share",
+    "onTimeRate": "2-Hour On-Time Delivery Rate",
+    "fitmentAccuracy": "OEM Guaranteed Fitment Accuracy",
+    "topSellingParts": "Top Dispatched Spare Parts"
   }
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   ShieldCheck,
   Filter,
@@ -45,11 +46,11 @@ export default function HeroWithSidebar({
   onResetVehicle,
 }: HeroWithSidebarProps) {
   const quickCategories = [
-    { id: "engine", icon: Cpu, name: "Phụ tùng động cơ & máy", count: "1.240 mã" },
-    { id: "brake", icon: Disc, name: "Hệ thống phanh & má đĩa", count: "890 mã" },
-    { id: "suspension", icon: Wrench, name: "Gầm, càng A & giảm xóc", count: "950 mã" },
-    { id: "cooling", icon: Zap, name: "Điện, lốc lạnh & điều hòa", count: "620 mã" },
-    { id: "oil", icon: Droplet, name: "Dầu nhớt, phụ gia & nước mát", count: "340 mã" },
+    { id: "engine", slug: "phu-tung-dong-co", icon: Cpu, name: "Phụ tùng động cơ & máy", count: "1.240 mã" },
+    { id: "brake", slug: "he-thong-phanh", icon: Disc, name: "Hệ thống phanh & má đĩa", count: "890 mã" },
+    { id: "suspension", slug: "gam-giam-xoc", icon: Wrench, name: "Gầm, càng A & giảm xóc", count: "950 mã" },
+    { id: "cooling", slug: "dien-dieu-hoa", icon: Zap, name: "Điện, lốc lạnh & điều hòa", count: "620 mã" },
+    { id: "oil", slug: "dau-nhot-phu-gia", icon: Droplet, name: "Dầu nhớt, phụ gia & nước mát", count: "340 mã" },
   ];
 
   const popularMakes = [
@@ -79,15 +80,17 @@ export default function HeroWithSidebar({
             {quickCategories.map((c) => {
               const Icon = c.icon;
               return (
-                <li
-                  key={c.id}
-                  className="flex items-center justify-between p-2 rounded-xl text-xs text-slate-700 hover:bg-sky-50 hover:text-sky-700 cursor-pointer transition group"
-                >
-                  <div className="flex items-center gap-2">
-                    <Icon className="h-4 w-4 text-slate-400 group-hover:text-sky-600 transition" />
-                    <span className="font-medium">{c.name}</span>
-                  </div>
-                  <ChevronRight className="h-3.5 w-3.5 text-slate-300 group-hover:text-sky-600 transition" />
+                <li key={c.id}>
+                  <Link
+                    href={`/phu-tung?category=${c.slug}`}
+                    className="flex items-center justify-between p-2 rounded-xl text-xs text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition group"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Icon className="h-4 w-4 text-slate-400 group-hover:text-sky-600 transition" />
+                      <span className="font-medium">{c.name}</span>
+                    </div>
+                    <ChevronRight className="h-3.5 w-3.5 text-slate-300 group-hover:text-sky-600 transition" />
+                  </Link>
                 </li>
               );
             })}
