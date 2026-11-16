@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"autoparts-backend/internal/modules/catalog"
 	"autoparts-backend/internal/modules/identity"
 	"autoparts-backend/internal/platform/authz"
 	"autoparts-backend/internal/platform/config"
@@ -46,6 +47,10 @@ func main() {
 	identitySvc := identity.NewService(identityRepo, cfg.JWTSecret, cfg.RefreshSecret)
 	identityHandler := identity.NewHandler(identitySvc, cfg.Environment)
 
+	catalogRepo := catalog.NewRepository(pool)
+	catalogSvc := catalog.NewService(catalogRepo)
+	catalogHandler := catalog.NewHandler(catalogSvc)
+
 	r := chi.NewRouter()
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
@@ -62,8 +67,14 @@ func main() {
 	authMiddleware := authz.RequireAuth(cfg.JWTSecret)
 
 	r.Route("/api/v1", func(api chi.Router) {
+		catalogHandler.RegisterRoutes(api, authMiddleware)
 		api.Route("/auth", func(auth chi.Router) {
 			identityHandler.RegisterRoutes(auth, authMiddleware)
+		})
+		api.Route("/admin", func(admin chi.Router) {
+			admin.Route("/auth", func(adminAuth chi.Router) {
+				identityHandler.RegisterAdminRoutes(adminAuth, authMiddleware)
+			})
 		})
 	})
 

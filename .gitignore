@@ -9,6 +9,7 @@ node_modules/
 out/
 build/
 dist/
+*.tsbuildinfo
 
 # Golang binaries and build outputs
 backend/bin/

@@ -1,6 +1,41 @@
 {
   "brand": {
-    "title": "ADMIN PORTAL"
+    "title": "PHỤ TÙNG Ô TÔ KV",
+    "subtitle": "Hệ thống Quản trị & Điều phối Phụ tùng Ô tô KV"
+  },
+  "sidebar": {
+    "collapse": "Thu gọn thanh điều hướng",
+    "expand": "Mở rộng thanh điều hướng",
+    "controlCenter": "TRUNG TÂM ĐIỀU HÀNH",
+    "operations": "VẬN HÀNH KHO & ĐIỀU PHỐI"
+  },
+  "topbar": {
+    "warehouseActive": "Kho Tổng Tân Bình • Sẵn Sàng Xuất Kho",
+    "systemLive": "Hệ Thống Trực Tuyến",
+    "searchShortcut": "Tìm nhanh mã OEM, SKU, số khung VIN..."
+  },
+  "auth": {
+    "loginTitle": "Đăng Nhập Quản Trị Hệ Thống",
+    "loginSubtitle": "Khu vực giới hạn dành riêng cho Ban Quản trị và Nhân viên Kỹ thuật.",
+    "emailLabel": "Email Quản trị",
+    "emailPlaceholder": "admin@phutungotokv.vn",
+    "passwordLabel": "Mật khẩu",
+    "passwordPlaceholder": "Nhập mật khẩu quản trị",
+    "loginButton": "Đăng Nhập Vào Portal",
+    "loading": "Đang xác thực...",
+    "logout": "Đăng xuất",
+    "loginRequired": "Yêu cầu đăng nhập để truy cập trang này",
+    "errors": {
+      "invalidCredentials": "Email hoặc mật khẩu không chính xác",
+      "unauthorizedRole": "Tài khoản của bạn không có quyền truy cập trang quản trị",
+      "networkError": "Không thể kết nối đến máy chủ Backend (Port 8080)"
+    }
+  },
+  "metrics": {
+    "totalProducts": "Tổng SKU Phụ Tùng",
+    "fitmentVehicles": "Dòng Xe Ánh Xạ",
+    "stockWarning": "Cảnh Báo Tồn Kho",
+    "pendingOrders": "Đơn Chờ Xuất Kho 2H"
   },
   "nav": {
     "vehicles": "Dữ Liệu Xe & Fitment",
@@ -28,6 +63,56 @@
       "unit": "cái",
       "variants": "biến thể"
     }
+  },
+  "orders": {
+    "title": "Điều Phối Đơn Hàng & Giao Hỏa Tốc 2H",
+    "subtitle": "Đối soát số khung VIN, duyệt xuất kho tại cầu nâng và quản lý trạng thái thanh toán",
+    "allFilter": "Tất cả đơn",
+    "pendingPayment": "Chờ VietQR",
+    "processing": "Chờ xuất kho",
+    "dispatching": "Đang giao 2H",
+    "completed": "Đã hoàn thành",
+    "cancelled": "Đã hủy",
+    "searchPlaceholder": "Tìm theo mã đơn, tên khách, số điện thoại, biển số...",
+    "orderCode": "Mã Đơn",
+    "customer": "Khách Hàng / Gara",
+    "items": "Linh Kiện Xuất Kho",
+    "total": "Tổng Tiền",
+    "payment": "Thanh Toán",
+    "status": "Trạng Thái",
+    "actions": "Thao Tác",
+    "approve2H": "Duyệt Giao 2H",
+    "confirmPaid": "Xác Nhận Đã Thu",
+    "printSlip": "In Phiếu Kho",
+    "exportExcel": "Xuất Excel Đơn Hàng",
+    "exportInventory": "Xuất Excel Tồn Kho",
+    "cancelOrder": "Hủy",
+    "empty": "Không tìm thấy đơn hàng nào phù hợp với bộ lọc.",
+    "packingSlipTitle": "PHIẾU XUẤT KHO KIÊM BÀN GIAO HỎA TỐC 2H",
+    "packingSlipCompany": "CÔNG TY TNHH PHỤ TÙNG Ô TÔ KV",
+    "packingSlipNote": "Hàng xuất kho kèm tem chống giả QR điện tử. Giao tận cầu nâng Gara trong 120 phút.",
+    "close": "Đóng"
+  },
+  "b2b": {
+    "title": "Mạng Lưới Gara Đối Tác & Hạn Mức Công Nợ",
+    "subtitle": "Quản lý 150+ Gara đối tác lắp đặt, duyệt cấp hạn mức nợ và chính sách giá sỉ B2B",
+    "garageName": "Tên Gara & Địa Chỉ",
+    "manager": "Người Quản Lý",
+    "phone": "Điện Thoại",
+    "tier": "Cấp Đối Tác",
+    "discount": "Chiết Khấu Sỉ",
+    "creditLimit": "Hạn Mức Công Nợ",
+    "outstanding": "Dư Nợ Hiện Tại",
+    "status": "Trạng Thái",
+    "active": "Đang hoạt động"
+  },
+  "analytics": {
+    "title": "Báo Cáo Hiệu Quả Hoạt Động & Chuỗi Cung Ứng",
+    "subtitle": "Số liệu thời gian thực về doanh số, tỷ lệ lắp vừa 100% và tốc độ giao phụ tùng",
+    "revenueTotal": "Doanh Thu Tháng Này",
+    "revenueB2B": "Tỷ Trọng Khách Gara (B2B)",
+    "onTimeRate": "Tỷ Lệ Giao Đúng 2 Giờ",
+    "fitmentAccuracy": "Độ Chính Xác Chuẩn Mã Lắp Vừa",
+    "topSellingParts": "Top Phụ Tùng Xuất Kho Nhiều Nhất"
   }
 }
-
