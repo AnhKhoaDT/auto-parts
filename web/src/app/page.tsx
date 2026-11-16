@@ -1,113 +1,157 @@
-import Link from "next/link";
-import { Search, Camera, ShieldCheck, Wrench } from "lucide-react";
-import { getDictionary } from "@/lib/i18n";
+"use client";
 
-// Page renders localized storefront without any hardcoded strings.
+import { useEffect, useState } from "react";
+import { getDictionary } from "@/lib/i18n";
+import { useAuth } from "@/features/auth/useAuth";
+import { useCart } from "@/features/cart/useCart";
+import { catalogApi, Product as ApiProduct } from "@/lib/api";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
+import HeroWithSidebar from "@/components/home/HeroWithSidebar";
+import ValuePillars from "@/components/home/ValuePillars";
+import CategoriesGrid from "@/components/home/CategoriesGrid";
+import FeaturedProductTabs from "@/components/home/FeaturedProductTabs";
+import BrandsGrid from "@/components/home/BrandsGrid";
+
+// HomePage composes decoupled architectural components in a balanced Sky Blue, White, and Black theme.
 export default function HomePage() {
   const dict = getDictionary("vi");
+  const { user, fetchUser, logout, isLoading } = useAuth();
+
+  // Vehicle selector filter states
+  const [selectedYear, setSelectedYear] = useState("2021");
+  const [selectedMake, setSelectedMake] = useState("Toyota");
+  const [selectedModel, setSelectedModel] = useState("Vios");
+  const [selectedEngine, setSelectedEngine] = useState("1.5L 2NR-FE");
+  const [activeCarFilter, setActiveCarFilter] = useState("Toyota Vios (2018-2022) 1.5L");
+  const [searchCategory, setSearchCategory] = useState("ALL");
+  const [searchQuery, setSearchQuery] = useState("");
+  const { cartCount, addToCart } = useCart();
+  const [apiProducts, setApiProducts] = useState<ApiProduct[]>([]);
+
+  useEffect(() => {
+    fetchUser();
+
+    // Check active car filter from garage storage
+    const savedFilter = localStorage.getItem("kv_active_car_filter");
+    if (savedFilter) {
+      setActiveCarFilter(savedFilter);
+    }
+
+    // Load real automotive products from backend catalog API
+    catalogApi
+      .getProducts({ limit: 12 })
+      .then((res) => {
+        if (res?.products && res.products.length > 0) {
+          setApiProducts(res.products);
+        }
+      })
+      .catch(() => {
+        // Fallback gracefully to offline items
+      });
+  }, [fetchUser]);
+
+  const handleApplyVehicle = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (selectedMake && selectedModel) {
+      const formatted = `${selectedMake} ${selectedModel} (${selectedYear}) ${selectedEngine}`;
+      setActiveCarFilter(formatted);
+      localStorage.setItem("kv_active_car_filter", formatted);
+    }
+  };
+
+  const handleResetVehicle = () => {
+    setSelectedYear("");
+    setSelectedMake("");
+    setSelectedModel("");
+    setSelectedEngine("");
+    setActiveCarFilter("");
+    localStorage.removeItem("kv_active_car_filter");
+  };
 
   return (
-    <main className="min-h-screen pb-20">
-      {/* Editorial Header */}
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
-          <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-white font-black">
-              AP
-            </span>
-            <div>
-              <span className="block text-lg font-black tracking-tight text-slate-900">
-                {dict.brand.name}
-                <span className="text-sky-600">{dict.brand.extension}</span>
-              </span>
-              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-                {dict.brand.tagline}
-              </span>
-            </div>
-          </div>
-          <Link
-            href="/my-garage"
-            className="flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold hover:border-slate-400"
-          >
-            <Wrench className="h-3.5 w-3.5 text-sky-600" />
-            <span>{dict.nav.myGarage.replace("{count}", "0")}</span>
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-screen bg-slate-100/70 text-slate-900 antialiased pb-20 md:pb-0 flex flex-col justify-between">
+      {/* Decoupled Header Bar */}
+      <Header
+        dict={dict}
+        user={user}
+        isLoading={isLoading}
+        logout={logout}
+        activeCarFilter={activeCarFilter}
+        onOpenProfile={() => {
+          window.location.href = "/ho-so";
+        }}
+        cartCount={cartCount}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        searchCategory={searchCategory}
+        setSearchCategory={setSearchCategory}
+      />
 
-      {/* Industrial Hero: High-contrast Search Bar */}
-      <section className="bg-slate-900 px-4 py-12 text-white sm:px-6">
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-950/60 px-3 py-1 text-xs font-medium text-sky-300">
-            <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-            {dict.hero.badge}
-          </div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white mb-4">
-            {dict.hero.title}
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto mb-8">
-            {dict.hero.subtitle}
-          </p>
+      {/* Main Body with Balanced Margins and Zero Empty Voids */}
+      <main className="mx-auto max-w-[1560px] w-full px-4 sm:px-8 xl:px-12 py-6 space-y-8 flex-1">
+        {/* Hero Banner with Left Catalog Drawer */}
+        <HeroWithSidebar
+          dict={dict}
+          selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
+          selectedMake={selectedMake}
+          setSelectedMake={setSelectedMake}
+          selectedModel={selectedModel}
+          setSelectedModel={setSelectedModel}
+          selectedEngine={selectedEngine}
+          setSelectedEngine={setSelectedEngine}
+          activeCarFilter={activeCarFilter}
+          onApplyVehicle={handleApplyVehicle}
+          onResetVehicle={handleResetVehicle}
+        />
 
-          {/* Search Bar with Camera Action */}
-          <div className="mx-auto flex max-w-2xl items-center rounded-xl bg-white p-2 shadow-2xl text-slate-800">
-            <Search className="ml-2 h-5 w-5 text-slate-400" />
-            <input
-              type="text"
-              placeholder={dict.hero.searchPlaceholder}
-              className="w-full px-3 py-2 text-xs sm:text-sm outline-none bg-transparent"
-            />
-            <button
-              title={dict.hero.scanVin}
-              className="flex items-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-200"
-            >
-              <Camera className="h-4 w-4 text-sky-600" />
-              <span className="hidden sm:inline">{dict.hero.scanVin}</span>
-            </button>
-            <button className="ml-2 rounded-lg bg-sky-600 px-4 py-2 text-xs sm:text-sm font-bold text-white hover:bg-sky-700">
-              {dict.hero.searchAction}
-            </button>
-          </div>
-        </div>
-      </section>
+        {/* 4 Technical Service Value Pillars */}
+        <ValuePillars dict={dict} />
 
-      {/* Asymmetric Bento Grid for Systems */}
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-bold text-slate-900">
-            {dict.categories.title}
-          </h2>
-          <span className="text-xs font-semibold text-sky-600 hover:underline cursor-pointer">
-            {dict.categories.viewAll} &rarr;
-          </span>
-        </div>
+        {/* Categories Bento Grid */}
+        <CategoriesGrid dict={dict} />
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="border border-slate-200 bg-white p-4 rounded-xl hover:border-slate-400 transition cursor-pointer">
-            <span className="text-xs font-mono font-bold text-slate-400 block mb-1">01 / ENG</span>
-            <h3 className="font-bold text-slate-800 text-sm">{dict.categories.engine.title}</h3>
-            <p className="text-[11px] text-slate-500 mt-1">{dict.categories.engine.desc}</p>
-          </div>
+        {/* Featured Products with Tabs */}
+        <FeaturedProductTabs
+          dict={dict}
+          onAddToCart={() => {
+            const first = apiProducts?.[0];
+            if (first) {
+              addToCart({
+                id: first.id,
+                slug: first.slug,
+                oem_number: first.oem_number,
+                name: first.name,
+                brand_name: first.brand_name || "OEM Parts",
+                grade: first.grade,
+                retail_price: first.retail_price,
+                wholesale_price: first.wholesale_price,
+                stock_quantity: first.stock_quantity,
+                warranty_months: first.warranty_months,
+              });
+            }
+          }}
+          apiProducts={apiProducts}
+        />
 
-          <div className="border border-slate-200 bg-white p-4 rounded-xl hover:border-slate-400 transition cursor-pointer">
-            <span className="text-xs font-mono font-bold text-slate-400 block mb-1">02 / BRK</span>
-            <h3 className="font-bold text-slate-800 text-sm">{dict.categories.brake.title}</h3>
-            <p className="text-[11px] text-slate-500 mt-1">{dict.categories.brake.desc}</p>
-          </div>
+        {/* Global Partner Brands */}
+        <BrandsGrid dict={dict} />
+      </main>
 
-          <div className="border border-slate-200 bg-white p-4 rounded-xl hover:border-slate-400 transition cursor-pointer">
-            <span className="text-xs font-mono font-bold text-slate-400 block mb-1">03 / SUS</span>
-            <h3 className="font-bold text-slate-800 text-sm">{dict.categories.suspension.title}</h3>
-            <p className="text-[11px] text-slate-500 mt-1">{dict.categories.suspension.desc}</p>
-          </div>
+      {/* Decoupled Footer */}
+      <Footer dict={dict} />
 
-          <div className="border border-slate-200 bg-white p-4 rounded-xl hover:border-slate-400 transition cursor-pointer">
-            <span className="text-xs font-mono font-bold text-slate-400 block mb-1">04 / ELE</span>
-            <h3 className="font-bold text-slate-800 text-sm">{dict.categories.electrical.title}</h3>
-            <p className="text-[11px] text-slate-500 mt-1">{dict.categories.electrical.desc}</p>
-          </div>
-        </div>
-      </section>
-    </main>
+      {/* Mobile Sticky Bottom Navigation */}
+      <MobileBottomNav
+        dict={dict}
+        user={user}
+        cartCount={cartCount}
+        onOpenProfile={() => {
+          window.location.href = "/ho-so";
+        }}
+      />
+    </div>
   );
 }
